@@ -33,3 +33,14 @@ exports.updateUser = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 };
+
+// Delete user
+exports.deleteUser = async(req, res) => {
+    try{
+        await User.findOneAndDelete(req.params.id);
+        res.status(200).json("User deleted");
+    }
+    catch(e) {
+        res.status(400).json({ message : "Something went wronge", error : e})
+    }
+}
