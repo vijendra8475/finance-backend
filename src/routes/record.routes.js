@@ -12,13 +12,9 @@ const {
     deleteRecord
 } = require('../controllers/record.controller');
 
-router.post('/', auth, allowRoles('admin'));
-router.get('/', auth, allowRoles('admin', 'analyst', 'viewer'));
-router.patch('/:id', auth, allowRoles('admin'));
-router.delete('/:id', auth, allowRoles('admin'));
-router.post('/', createRecord);
-router.get('/', getRecords);
-router.patch('/:id', updateRecord);
-router.delete('/:id', deleteRecord);
+router.post('/', auth, allowRoles('admin'), createRecord);
+router.get('/', auth, allowRoles('admin', 'analyst', 'viewer'), getRecords);
+router.patch('/:id', auth, allowRoles('admin'), updateRecord);
+router.delete('/:id', auth, allowRoles('admin'), deleteRecord);
 
 module.exports = router;

@@ -9,8 +9,8 @@ const {
     updateUser
 } = require('../controllers/user.controller');
 
-router.post('/', auth, allowRoles('admin'));
-router.get('/', auth, allowRoles('admin'));
-router.patch('/:id', auth, allowRoles('admin'));
+router.post('/', auth, allowRoles('admin'), createUser);
+router.get('/', auth, allowRoles('admin'), getUsers);
+router.patch('/:id', auth, allowRoles('admin'), updateUser);
 
 module.exports = router;

@@ -5,16 +5,18 @@ const { recordSchema } = require('../utils/validator');
 // Create Record
 exports.createRecord = async (req, res) => {
     try {
-        // ✅ validation
+        // validation
         const { error } = recordSchema.validate(req.body);
 
         if (error) {
             return res.status(400).json({ message: error.details[0].message });
         }
 
-        // ✅ actual logic
-        req.body.createdBy = req.user._id;
-        const record = await Record.create(req.body);
+        // actual logic
+        const record = await Record.create({
+            ...req.body,
+            createdBy: req.user._id
+        });
 
         res.status(201).json(record);
 
